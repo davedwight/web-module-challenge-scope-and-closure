@@ -104,12 +104,22 @@ Use the getInningScore() function below to do the following:
   2. Return an object with a score for home and a score for away that populates from invoking the inning callback function */
 
 function getInningScore(callback) {
-  let scores = {Home: 0, Away: 0};
-  scores.Home += callback();
-  scores.Away += callback();
-  return scores;
+  return {Home: callback(), Away: callback()};
+  // scores.Home = scores.Home + callback();
+  // scores.Away = scores.Away + callback();
 }
 console.log('task4', getInningScore(inning));
+
+// function getInningScore(inning) {
+//   return{
+//     Home : inning(),
+//     Away : inning()
+//   }
+// }
+
+// const inningCallback = inning();
+// console.log('task4test', inning());
+// console.log('task4', getInningScore(inningCallback));
 
 
 /* ⚾️⚾️⚾️ Task 5: scoreboard() ⚾️⚾️⚾️
@@ -121,7 +131,35 @@ Use the scoreboard function below to do the following:
   Home and Away team's scores for each inning.  Not the cummulative score.
   5. If there's a tie at the end of the innings, add this message containing the score to the end of the array:  "This game will require extra innings: Away 12 - Home 12"  (see tie example below)
      If there isn't a tie, add this message to the end of the array: "Final Score: Away 13 - Home 11"  (see no tie example below)
-  
+  */
+
+function scoreboard(getInningScorecb, inningcb, innings) {
+  const inningScore = [];
+  const scores = {Home: 0, Away: 0}
+  // let homeScore = 0;
+  // let awayScore = 0;
+  for(let i = 0; i < innings; i++){
+    const currentScore = getInningScorecb(inningcb);
+    scores.Home += currentScore.Home;
+    scores.Away += currentScore.Away;
+    inningScore.push(`Inning ${i+1}: Away ${currentScore.Away} - Home ${currentScore.Away}`);
+    console.log('inside for loop', scores.Home);
+  }
+  if(scores.Home === scores.Away){
+    console.log("It's a tie.")
+    inningScore.push(`This game will require extra innings: Away ${scores.Away} - Home ${scores.Home}`)
+  } else {
+    inningScore.push(`Final Score: Away ${scores.Away} - Home ${scores.Home}`)
+  }
+  console.log(inningScore);
+  return inningScore;
+}
+
+
+
+console.log('task5', scoreboard(getInningScore, inning, 9));
+
+/*
   NO TIE example: invoking scoreboard(getInningScore,inning, 9) might return 
   an array of strings like this:
 [
@@ -153,9 +191,7 @@ Use the scoreboard function below to do the following:
 ]  
   */
 
-function scoreboard(/* CODE HERE */) {
-  /* CODE HERE */
-}
+
 
 
 
