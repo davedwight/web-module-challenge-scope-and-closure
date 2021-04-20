@@ -69,7 +69,7 @@ NOTE: This will be a callback function for the tasks below
 */
 
 function inning(){
-    return Math.floor(Math.random() * 2);
+    return Math.floor(Math.random() * 3);
 }
 
 
@@ -89,16 +89,14 @@ Use the finalScore function below to do the following:
 
 function finalScore(callback, innings){
   const gameScore = {Home: 0, Away: 0};
-  let homeScore = 0;
-  let awayScore = 0;
 
   for(let i = 0; i < innings; i++) {
-    homeScore = homeScore + gameScore.Home;
-    awayScore = awayScore + gameScore.Away;
+    gameScore.Home += callback();
+    gameScore.Away += callback();
   }
   return gameScore;
 }
-console.log(finalScore(inning, 9));
+console.log('task 3', finalScore(inning, 9));
 
 /* ⚾️⚾️⚾️ Task 4: getInningScore() ⚾️⚾️⚾️
 Use the getInningScore() function below to do the following:
@@ -107,11 +105,11 @@ Use the getInningScore() function below to do the following:
 
 function getInningScore(callback) {
   let scores = {Home: 0, Away: 0};
-  scores.Home += inning();
-  scores.Away += inning();
+  scores.Home += callback();
+  scores.Away += callback();
   return scores;
 }
-console.log(getInningScore(inning));
+console.log('task4', getInningScore(inning));
 
 
 /* ⚾️⚾️⚾️ Task 5: scoreboard() ⚾️⚾️⚾️
@@ -158,6 +156,21 @@ Use the scoreboard function below to do the following:
 function scoreboard(/* CODE HERE */) {
   /* CODE HERE */
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // function scoreboard(getInningScore, inning, inningsPlayed) {
 //   const gameRecap = [];
